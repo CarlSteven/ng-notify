@@ -2,6 +2,9 @@
  * @license ng-notify v0.4.0
  * http://matowens.github.io/ng-notify
  * (c) 2014 MIT License, matowens.com
+ * 
+ * Edited by: CarlSteven.
+ * Adds ionic compatibility
  */
 (function() {
     'use strict';
@@ -64,7 +67,7 @@
                 var tpl = $compile(
                     '<div class="ngn" ng-class="ngNotify.notifyClass">' +
                         '<span class="ngn-dismiss" ng-click="dismiss()">&times;</span>' +
-                        '<span ng-bind-html="ngNotify.notifyMessage"></span>' +
+                        '<span>{{ ngNotify.notifyMessage }}</span>' +
                     '</div>'
                 )(notifyScope);
 
@@ -205,6 +208,7 @@
                 fadeLib.fn.prototype.fadeIn = function(duration, callback) {
                     this.el.css('filter', 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)');
                     this.el.css('display', 'block');
+                    this.el.css('z-index', '999');
                     this._fade(1, 0, duration, callback);
                 };
 
@@ -216,6 +220,7 @@
                  */
                 fadeLib.fn.prototype.fadeOut = function(duration, callback) {
                     this._fade(-1, 1, duration, callback);
+                    this.el.css('z-index', '0');
                 };
 
                 /**
